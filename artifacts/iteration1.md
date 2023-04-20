@@ -1,6 +1,6 @@
 # Iteration One Plan for Parallel ClamAV Project
 **Created:**&nbsp;&nbsp; April 20<sup>th</sup>, 2023  
-**Updated:**&nbsp; 04-20-23 @ 4:09 AM
+**Updated:**&nbsp; 04-20-23 @ 8:09 PM
 ---
 
 &nbsp;
@@ -17,8 +17,10 @@
 
 The following is expected to be completed during this iteration (number one):
 
-* yeet
-* more yeet
+(in general)
+* develop contents of vision and usecase documents
+* develop a minimal working prototype
+* develop plan for next iteration
 
 
 &nbsp;
