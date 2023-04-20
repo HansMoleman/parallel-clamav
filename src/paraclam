@@ -1,0 +1,52 @@
+#!/bin/bash
+
+###  ParaClam (ver-0.0.0)  ----------------------------------###
+#                                                              #
+# EXEC:  ./paraclam <start-path>
+# DEPN:  ClamScanAV, Parallel
+#
+# This script defines most of the paraclam wrapper
+# functionality.
+#
+# -------
+# LICENSE
+# -------
+#
+#  ...
+#
+#                                                             #
+###---------------------------------------------------------###
+
+
+
+###---------------------------------------------------------###
+#                                                             #
+# ---------
+# ALGORITHM
+# ---------
+#
+#  (1) from the starting directory keep expanding
+#      subdirectories until there are no more to expand.
+#
+#  (2) while expanding subdirectories, append each subdirs'
+#      path to file of directory paths.
+#
+#  (3) for each directory path in path file, use an available
+#      processing thread to perform a non-recursive clamscan
+#      on the given directory.
+#
+#  (4) save all output of each directory's clamscan to an out
+#      file within output directory, at path corresponding to
+#      that of directory scanned.
+#
+#  (5) iterate over out files contained within output directory
+#      and sort output such that all error & found virus
+#      messages are organized together in their own files
+#      (respectively), then print an overall scan summary that
+#      merges all sub-scan summaries into one.
+#      (..POSSIBLY..?)
+#
+#  (6) perform any necessary cleanup, then exit.
+#
+#                                                             #
+###---------------------------------------------------------###
