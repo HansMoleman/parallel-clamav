@@ -1,0 +1,111 @@
+#!/bin/bash
+
+
+### VARIABLES  -----------------------------------------------#
+
+# initialize starting dir based on user args (if any):
+if ! [ $1 = "" ];
+then
+	INITPATH=$1
+else
+	INITPATH=$( pwd )
+fi
+
+# initialize path to output file:
+OUTPATH="$( pwd )/characters.out.txt"
+
+# initialize path to log file:
+LOGPATH="$( pwd )/characters.log.txt"
+
+
+
+
+### FUNCTIONS  -----------------------------------------------#
+
+
+## getUniqueChars(str:directory) : None ##
+#
+# Iterates over given directory and any/all of its subdirectories
+# and stores a list of the unique characters used to name
+# those subdirectories.
+# References a global list named 'chars'.
+##ng the most used ones.ng the most used ones.
+getUniqueChars() {
+	dir=$1
+
+	for path in $dir/*;
+	do
+		# ensure path is a directory:
+		if [ -d "${path}" ];
+		then
+			name=${path##*/}
+	
+			for (( i=0; i<${#name}; i++ ));
+			do
+				C="${name:$i:1}"
+				updateUniqueChars $C
+			done
+
+			getUniqueChars $path
+		fi
+	done
+}
+
+
+## saveUniqueChars() : None ##
+#
+##
+saveUniqueChars(){
+	
+	# ensure output file is accessible:
+	if ! [ -f $OUTPATH ];
+	then
+		touch "${OUTPATH}"
+	fi
+
+	# save each character in list to outfile:
+	for C in ${chars[@]};
+	do
+		echo $C >> $OUTPATH
+	done
+}
+
+
+## updateUniqueChars() : None ##
+#
+##
+updateUniqueChars() {
+	char=$1
+	isnew="true"
+
+	for C in ${chars[@]};
+	do
+		if [ "${C}" = "${char}" ];
+		then
+			isnew="false"
+		fi
+	done
+
+	if [ $isnew = "true" ];
+	then
+		chars+=( $char )
+	fi
+}
+
+
+
+
+
+## MAIN FUNC.  -----------------------------------------------#
+
+# define array for holding found characters:
+chars=()
+
+# iterate over dir and all subdirs and check for unknown characters:
+getUniqueChars $INITPATH
+
+# save all characters found to file:
+saveUniqueChars
+
+# exit message:
+echo "Complete. See ${OUTPATH} for unique characters found."

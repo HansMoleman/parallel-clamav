@@ -1,0 +1,43 @@
+#!/bin/bash
+
+
+# set up user args
+
+if [ $1 = "" ];
+then
+	STPATH="${CWD}"
+else
+	STPATH="${1}"
+fi
+
+
+# ensure output file is accessible:
+
+OUTFILE="/home/ricky/Desktop/testoutput.txt"
+
+if ! [ -f $OUTFILE ];
+then
+	touch "${OUTFILE}"
+fi
+
+
+# get all subdirs within starting dir and add to output file:
+
+getsubpaths() {
+	dir=$1
+
+	for path in $dir/*;
+	do
+		echo $path
+
+		if [ -d "${path}" ];
+		then
+			echo $path >> $OUTFILE
+			getsubpaths "${path}"
+		fi
+	done
+}
+
+getsubpaths "${STPATH}"
+
+echo "complete."

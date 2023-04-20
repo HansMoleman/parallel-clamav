@@ -1,0 +1,22 @@
+#!/bin/bash
+
+OUTPTH="/home/ricky/Desktop/characters.out.txt"
+LOGPTH="/home/ricky/Desktop/characters.log.txt"
+
+if [ "${1}" = "--clean" ];
+then
+	# remove temp files:
+	if [ -f "${OUTPTH}" ];
+	then
+		rm $OUTPTH
+	fi
+
+	if [ -f "${LOGPTH}" ];
+	then	
+		rm $LOGPTH
+	fi
+else
+	# run test:
+	OUTPUT=$( bash check-chars /home/ricky/Desktop/SampleDir )
+	echo $OUTPUT
+fi
